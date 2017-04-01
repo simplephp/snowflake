@@ -1,0 +1,10 @@
+snowflake.lo: /sh-1.4.4/php-5.5.7/ext/snowflake/snowflake.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/sh-1.4.4/php-5.5.7/ext/snowflake $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /sh-1.4.4/php-5.5.7/ext/snowflake/snowflake.c -o snowflake.lo 
+snowflake_lib.lo: /sh-1.4.4/php-5.5.7/ext/snowflake/snowflake_lib.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/sh-1.4.4/php-5.5.7/ext/snowflake $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /sh-1.4.4/php-5.5.7/ext/snowflake/snowflake_lib.c -o snowflake_lib.lo 
+$(phplibdir)/snowflake.la: ./snowflake.la
+	$(LIBTOOL) --mode=install cp ./snowflake.la $(phplibdir)
+
+./snowflake.la: $(shared_objects_snowflake) $(SNOWFLAKE_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_snowflake) $(SNOWFLAKE_SHARED_LIBADD)
+
